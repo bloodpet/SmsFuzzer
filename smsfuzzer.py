@@ -22,7 +22,7 @@ from smsfuzzer_funcs import *
 
 mySerialPort = serial.Serial()
 mySerialPort.port = 	"/dev/ttyUSB0" #default so not null
-mySerialPort.baudrate = 9600
+mySerialPort.baudrate =  115200
 mySerialPort.bytesize = serial.EIGHTBITS #number of bits per bytes
 mySerialPort.parity = 	serial.PARITY_NONE #set parity check: no parity
 mySerialPort.stopbits = serial.STOPBITS_ONE #number of stop bits
@@ -83,7 +83,7 @@ class ExampleFrame(wx.Frame):
 		if mySerialPort.isOpen():
 			mySerialPort.flushInput() #flush input buffer, discarding all its contents
         		mySerialPort.flushOutput()#flush output buffer, aborting current output
-			mySerialPort.write("AT+CMGS=17"+"\x0D")
+			mySerialPort.write("AT+CMGS=23"+"\x0D")
 			
                         PDU_STRING = createPduString(self.edit_target_number.GetValue(),
 						     self.edit_target_msg.GetValue(),
@@ -114,7 +114,7 @@ class ExampleFrame(wx.Frame):
 	self.edit_target_number = wx.TextCtrl(panel,size=(135,30), pos=(80,65),value='123456789012')
 
 	self.lb_target_data = wx.StaticText(panel, label="Sms Msg:",pos=(5,95))
-	self.edit_target_msg = wx.TextCtrl(panel,size=(135,60), pos=(80,95),value='Hello World',style=wx.TE_MULTILINE)
+	self.edit_target_msg = wx.TextCtrl(panel,size=(135,60), pos=(80,95),value='hello',style=wx.TE_MULTILINE)
 
 	self.cb_report = wx.CheckBox(panel,-1,'Del\nReport', pos=(5,110),size=(80,50))
 	self.cb_report.SetValue(True)
